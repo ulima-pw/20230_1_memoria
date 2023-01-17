@@ -22,11 +22,14 @@ function createBoard(numFilas, numColumnas) {
 }
 
 function printBoard(board) {
+    let filaStr = ""
     for (let fila of board) {
         for (let casilla of fila) {
-            console.log(casilla)
+            filaStr = filaStr + casilla + " "
         }
+        filaStr += "\n" 
     }
+    console.log(filaStr)
 }
 
 function main() {
