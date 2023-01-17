@@ -14,7 +14,11 @@ function createBoard(numFilas, numColumnas) {
         const casillas = []
 
         for (let j = 0; j < numColumnas; j++) {
-            casillas.push(0)
+            const dataCasilla = {
+                simbolo : "💗",
+                visible : false
+            }
+            casillas.push(dataCasilla)
         }
         rows.push(casillas)
     }
@@ -25,7 +29,12 @@ function printBoard(board) {
     let filaStr = ""
     for (let fila of board) {
         for (let casilla of fila) {
-            filaStr = filaStr + casilla + " "
+            if (casilla.visible == true) {
+                filaStr = filaStr + casilla.simbolo + " "
+            }else {
+                filaStr = filaStr + "-" + " "
+            }
+            
         }
         filaStr += "\n" 
     }
