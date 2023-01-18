@@ -22,13 +22,16 @@ function createBoard(numFilas, numColumnas) {
         const casillas = []
 
         for (let j = 0; j < numColumnas; j++) {
-            const posicionAlAzar = Math.floor(Math.random()*arrSimbolosTemporal.length)
+            const posicionAlAzar = Math.floor(
+                Math.random()*arrSimbolosTemporal.length
+            )
 
             const simboloElegido = arrSimbolosTemporal[posicionAlAzar]
+            arrSimbolosTemporal.splice(posicionAlAzar, 1)
 
             const dataCasilla = {
                 simbolo : simboloElegido,
-                visible : false
+                visible : true
             }
             casillas.push(dataCasilla)
         }
