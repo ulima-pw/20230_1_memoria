@@ -56,9 +56,45 @@ function printBoard(board) {
     console.log(filaStr)
 }
 
+function crearDivFila() {
+    const divFila = document.createElement("div")
+    divFila.setAttribute("class", "row")
+
+    return divFila
+}
+
+function crearDivColumna(simbolo) {
+    const divColumna = document.createElement("div")
+    divColumna.setAttribute("class", "col")
+
+    const divBut = document.createElement("button")
+    divBut.setAttribute("type", "button")
+    divBut.setAttribute("class", "btn btn-success")
+    divBut.setAttribute("style", "font-size: 40px;")
+    divBut.innerText = simbolo
+
+    divColumna.appendChild(divBut)
+
+    return divColumna
+}
+
+function renderizarBoard(board) {
+    for (let i = 0; i < board.length; i++) {
+        const fila = board[i]
+        const divFila = crearDivFila()
+        for (let j = 0; j < fila.length; j++) {
+            const casilla = fila[j]
+            const divColumna = crearDivColumna(casilla.simbolo)
+            divFila.appendChild(divColumna)
+        }
+        document.body.appendChild(divFila)
+    }
+}
+
 function main() {
-    board = createBoard(4, 4)
+    board = createBoard(3, 3)
     printBoard(board)
+    renderizarBoard(board)
 }
 
 main()
