@@ -31,7 +31,7 @@ function createBoard(numFilas, numColumnas) {
 
             const dataCasilla = {
                 simbolo : simboloElegido,
-                visible : true
+                visible : false
             }
             casillas.push(dataCasilla)
         }
