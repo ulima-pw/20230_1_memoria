@@ -1,5 +1,7 @@
 let board;
 let simbolosDisponibles = ["🍭", "🍫", "🍬", "🍩", "🍦", "🍰", "🍯", "🍧"]
+let estadoJuego = 1;
+let casillaTemporal = null
 
 /*
 board = [
@@ -56,6 +58,10 @@ function printBoard(board) {
     console.log(filaStr)
 }
 
+function verificarMatch(casilla1, casilla2) {
+    return casilla1.simbolo === casilla2.simbolo
+}
+
 function butOnClick(evt) {
     const butClickeado = evt.target
     const fila = butClickeado.getAttribute("fila")
@@ -63,6 +69,19 @@ function butOnClick(evt) {
 
     const casilla = board[fila][columna]
     casilla.visible = !casilla.visible
+
+    if (estadoJuego == 1) {
+        casillaTemporal = casilla
+        estadoJuego = 2
+    }else {
+        // Verificar si hubo match
+        const resultado = verificarMatch(casillaTemporal, casilla)
+        if (resultado == false) {
+            casillaTemporal.visible = false
+            casilla.visible = false
+        }
+        estadoJuego = 1
+    }
 
     renderizarBoard(board)
 }
