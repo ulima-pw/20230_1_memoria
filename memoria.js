@@ -56,6 +56,17 @@ function printBoard(board) {
     console.log(filaStr)
 }
 
+function butOnClick(evt) {
+    const butClickeado = evt.target
+    const fila = butClickeado.getAttribute("fila")
+    const columna = butClickeado.getAttribute("columna")
+
+    const casilla = board[fila][columna]
+    casilla.visible = !casilla.visible
+
+    renderizarBoard(board)
+}
+
 function crearDivFila() {
     const divFila = document.createElement("div")
     divFila.setAttribute("class", "row")
@@ -63,7 +74,7 @@ function crearDivFila() {
     return divFila
 }
 
-function crearDivColumna(simbolo) {
+function crearDivColumna(fil, col, simbolo, visible) {
     const divColumna = document.createElement("div")
     divColumna.setAttribute("class", "col")
 
@@ -71,23 +82,34 @@ function crearDivColumna(simbolo) {
     divBut.setAttribute("type", "button")
     divBut.setAttribute("class", "btn btn-success")
     divBut.setAttribute("style", "font-size: 40px;")
-    divBut.innerText = simbolo
+    divBut.setAttribute("fila", fil)
+    divBut.setAttribute("columna", col)
+    if (visible) {
+        divBut.innerText = simbolo
+    }else {
+        divBut.innerText = ""
+    }
 
+    divBut.onclick = butOnClick; // asignamos funcion que se ejecutar dado click
+    
     divColumna.appendChild(divBut)
 
     return divColumna
 }
 
 function renderizarBoard(board) {
+    const divBoard = document.getElementById("board")
+    divBoard.innerHTML = ""
+
     for (let i = 0; i < board.length; i++) {
         const fila = board[i]
         const divFila = crearDivFila()
         for (let j = 0; j < fila.length; j++) {
             const casilla = fila[j]
-            const divColumna = crearDivColumna(casilla.simbolo)
+            const divColumna = crearDivColumna(i, j, casilla.simbolo, casilla.visible)
             divFila.appendChild(divColumna)
         }
-        document.body.appendChild(divFila)
+        divBoard.appendChild(divFila)
     }
 }
 
